@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { IoMdBookmark } from "react-icons/io";
+import { Link } from "react-router";
 
 const NewsCard = ({ newses }) => {
-  const { title, rating, total_view, author, thumbnail_url, details, tags } =
+  const { title, rating, total_view, author, thumbnail_url, details, id } =
     newses;
 
   const formattedDate = new Date(author.published_date).toLocaleDateString();
@@ -47,7 +48,11 @@ const NewsCard = ({ newses }) => {
             onClick={() => setExpanded(!expanded)}
             className="ml-2 text-blue-600 hover:underline font-medium"
           >
-            {expanded ? "See less" : "See more"}
+            {expanded ? (
+              "See less"
+            ) : (
+              <Link to={`/news-details/${id}`}>See more</Link>
+            )}
           </button>
         </p>
 

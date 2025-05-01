@@ -29,7 +29,7 @@ const CategoryNews = () => {
       <h1 className="font-bold text-2xl ml-5">Dragon News Home</h1>
       <div>
         {category?.map((newses) => (
-          <NewsCard newses={newses} />
+          <NewsCard key={newses.id} newses={newses} />
         ))}
       </div>
     </div>
