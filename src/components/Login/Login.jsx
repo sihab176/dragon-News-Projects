@@ -16,12 +16,12 @@ const Login = () => {
     // console.log(email, password);
     logInUser(email, password)
       .then((result) => {
-        console.log(result);
+        // console.log(result);
 
         navigate(`${location.state ? location.state : "/"}`);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
         setError(error.message);
       });
   };

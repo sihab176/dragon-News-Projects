@@ -1,12 +1,12 @@
 import React, { use, useState } from "react";
-import { Link, useLocation } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../../Provider/AuthProvider";
 
 const Register = () => {
   const { createUser, setUser, updateUserProfile } = use(AuthContext);
-  const location = useLocation();
+
   const [nameError, setNameError] = useState("");
-  // console.log(location);
+  const navigate = useNavigate();
 
   // !handle Register ||
   const handleRegister = (e) => {
@@ -27,16 +27,17 @@ const Register = () => {
         updateUserProfile({ displayName: name, photoURL: photo })
           .then(() => {
             setUser({ ...users, displayName: name, photoURL: photo });
+            navigate("/");
           })
           .catch((error) => {
-            console.log(error);
+            // console.log(error);
             setUser(users);
           });
 
-        console.log(users);
+        // console.log(users);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   };
 
