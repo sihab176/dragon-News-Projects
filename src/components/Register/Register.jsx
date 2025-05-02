@@ -1,19 +1,39 @@
-import React, { use } from "react";
-import { Link } from "react-router";
+import React, { use, useState } from "react";
+import { Link, useLocation } from "react-router";
 import { AuthContext } from "../../Provider/AuthProvider";
 
 const Register = () => {
-  const { createUser } = use(AuthContext);
+  const { createUser, setUser, updateUserProfile } = use(AuthContext);
+  const location = useLocation();
+  const [nameError, setNameError] = useState("");
+  // console.log(location);
+
+  // !handle Register ||
   const handleRegister = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
     const photo = e.target.photo.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
-    // console.log(name, photo, email, password);
+
+    if (name.length < 5) {
+      setNameError("invalid Name");
+      return;
+    }
+
     createUser(email, password)
       .then((result) => {
-        console.log(result);
+        const users = result.user;
+        updateUserProfile({ displayName: name, photoURL: photo })
+          .then(() => {
+            setUser({ ...users, displayName: name, photoURL: photo });
+          })
+          .catch((error) => {
+            console.log(error);
+            setUser(users);
+          });
+
+        console.log(users);
       })
       .catch((error) => {
         console.log(error);
@@ -29,7 +49,15 @@ const Register = () => {
         <form onSubmit={handleRegister} className="fieldset">
           {/* name */}
           <label className="label">Your Name</label>
-          <input type="text" className="input" placeholder="Name" name="name" />
+          <input
+            type="text"
+            className="input"
+            placeholder="Name"
+            name="name"
+            required
+          />
+          {nameError && <p className="text-red-500 text-[10px]">{nameError}</p>}
+
           {/* photo url */}
           <label className="label">Photo Url</label>
           <input
@@ -37,6 +65,7 @@ const Register = () => {
             className="input"
             placeholder="Photo Url"
             name="photo"
+            required
           />
           {/* email */}
           <label className="label">Email</label>
@@ -45,6 +74,7 @@ const Register = () => {
             className="input"
             placeholder="Email"
             name="email"
+            required
           />
           {/* password */}
           <label className="label">Password</label>
@@ -53,6 +83,7 @@ const Register = () => {
             className="input"
             placeholder="Password"
             name="password"
+            required
           />
 
           <button type="submit" className="btn btn-neutral mt-4">

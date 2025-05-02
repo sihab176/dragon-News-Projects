@@ -7,7 +7,7 @@ const CategoryNews = () => {
   const { id } = useParams();
 
   const [category, setCategory] = useState();
-  console.log(category);
+  // console.log(category);
 
   useEffect(() => {
     if (id == "0") {

@@ -11,9 +11,6 @@ const NewsCard = ({ newses }) => {
   const [expanded, setExpanded] = useState(false);
 
   return (
-    // <div>
-    //   <h1>{title}</h1>
-    // </div>
     <div className="card bg-base-100 shadow-xl mb-5">
       <div className="card-body">
         <div className="flex justify-between items-center gap-3 text-sm text-gray-600 mb-2 bg-base-200 p-5">
@@ -55,14 +52,6 @@ const NewsCard = ({ newses }) => {
             )}
           </button>
         </p>
-
-        {/* <div className="flex flex-wrap gap-2 mt-3">
-          {tags.map((tag, idx) => (
-            <span key={idx} className="badge badge-outline text-xs">
-              #{tag}
-            </span>
-          ))}
-        </div> */}
 
         <div className="flex justify-between items-center mt-4 text-sm">
           <div className="flex items-center gap-1 text-warning">

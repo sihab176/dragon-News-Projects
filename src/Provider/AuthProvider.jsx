@@ -3,14 +3,17 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 import React, { createContext, useEffect, useState } from "react";
 import { auth } from "../Firebase/Firebase.config";
+// import { useLocation } from "react-router";
 
 export const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+
   // console.log(user);
 
   // sing up
@@ -28,6 +31,11 @@ const AuthProvider = ({ children }) => {
   const logInUser = (email, password) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
+  };
+
+  //update user profile
+  const updateUserProfile = (updateData) => {
+    return updateProfile(auth.currentUser, updateData);
   };
 
   //save data
@@ -48,6 +56,8 @@ const AuthProvider = ({ children }) => {
     logInUser,
     loading,
     setLoading,
+    setUser,
+    updateUserProfile,
   };
   return <AuthContext value={authData}>{children}</AuthContext>;
 };

@@ -26,7 +26,11 @@ const Navbar = () => {
         <NavLink to="/contact">Contact</NavLink>
       </div>
       <div className="flex gap-5 items-center">
-        <img src={userPng} alt="" />
+        <img
+          className="w-12 h-12 rounded-full ring-2 ring-offset-4"
+          src={user ? user.photoURL : userPng}
+          alt=""
+        />
 
         {user ? (
           <button
